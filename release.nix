@@ -1,5 +1,12 @@
-with import <nixpkgs> {};
+{ nixpkgs ? <nixpkgs>
+, pkgs ? import nixpkgs {}
+}:
 
+let
+
+  inherit (pkgs) cmake stdenv;
+
+in
 rec {
   recurseForDerivations = true;
   lib = rec {
