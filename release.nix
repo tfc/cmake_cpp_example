@@ -1,16 +1,11 @@
-{ nixpkgs ? <nixpkgs>
-, pkgs ? import nixpkgs {}
-}:
-
 let
-
+  sources = import ./nix/sources.nix {};
+  pkgs = import sources.nixpkgs {};
   inherit (pkgs) cmake stdenv;
-
+  inherit (pkgs.lib) recurseIntoAttrs;
 in
-rec {
-  recurseForDerivations = true;
-  lib = rec {
-    recurseForDerivations = true;
+recurseIntoAttrs rec {
+  lib = recurseIntoAttrs rec {
     a = stdenv.mkDerivation {
       name = "liba";
       buildInputs = [ c d ];
