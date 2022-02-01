@@ -1,37 +1,47 @@
 let
-  sources = import ./nix/sources.nix {};
-  pkgs = import sources.nixpkgs {};
-  inherit (pkgs) cmake stdenv;
+  sources = import ./nix/sources.nix { };
+
+  overlayFunction = final: prev: rec {
+    myliba = final.callPackage ./a { };
+    mylibb = final.callPackage ./b { };
+    mylibc = final.callPackage ./c { };
+    mylibd = final.callPackage ./d { };
+    myapp = final.callPackage ./app { };
+  };
+
+  bigA = final: prev: {
+    myliba = prev.myliba.overrideAttrs (old: {
+      postPatch = ''
+        sed -i 's/"a"/"A"/' main.cpp
+      '';
+    });
+  };
+
+  bigC = final: prev: {
+    mylibc = prev.mylibc.overrideAttrs (old: {
+      postPatch = ''
+        sed -i 's/"c"/"C"/' main.cpp
+      '';
+    });
+  };
+
+  pkgs = import sources.nixpkgs {
+    overlays = [
+      overlayFunction
+      bigA
+      bigC
+    ];
+  };
   inherit (pkgs.lib) recurseIntoAttrs;
 in
 recurseIntoAttrs rec {
   lib = recurseIntoAttrs rec {
-    a = stdenv.mkDerivation {
-      name = "liba";
-      buildInputs = [ c d ];
-      nativeBuildInputs = [ cmake ];
-      src = ./a;
-    };
-    b = stdenv.mkDerivation {
-      name = "libb";
-      nativeBuildInputs = [ cmake ];
-      src = ./b;
-    };
-    c = stdenv.mkDerivation {
-      name = "libc";
-      nativeBuildInputs = [ cmake ];
-      src = ./c;
-    };
-    d = stdenv.mkDerivation {
-      name = "libd";
-      nativeBuildInputs = [ cmake ];
-      src = ./d;
-    };
+    inherit (pkgs)
+      myliba
+      mylibb
+      mylibc
+      mylibd
+      ;
   };
-  myapp = stdenv.mkDerivation {
-    name = "myapp";
-    buildInputs = with lib; [ a b c d ];
-    nativeBuildInputs = [ cmake ];
-    src = ./app;
-  };
+  inherit (pkgs) myapp;
 }

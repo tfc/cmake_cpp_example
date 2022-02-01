@@ -2,6 +2,6 @@
 
 namespace libc {
 
-std::string function_c() { return "C"; }
+std::string function_c() { return "c"; }
 
 }
