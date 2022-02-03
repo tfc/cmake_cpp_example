@@ -1,7 +1,7 @@
 let
   sources = import ./nix/sources.nix { };
 
-  overlayFunction = final: prev: rec {
+  overlayFunction = final: prev: {
     myliba = final.callPackage ./a { };
     mylibb = final.callPackage ./b { };
     mylibc = final.callPackage ./c { };
@@ -34,7 +34,7 @@ let
   };
   inherit (pkgs.lib) recurseIntoAttrs;
 in
-recurseIntoAttrs rec {
+{
   lib = recurseIntoAttrs rec {
     inherit (pkgs)
       myliba
