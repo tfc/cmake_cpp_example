@@ -10,8 +10,6 @@ set(as_subproject A B C D)
 # This macro originates from Daniel Pfeifer's talk at C++Now 2017:
 # https://www.youtube.com/watch?v=bsXLMQ6WgIk
 macro(find_package)
-  message(STATUS "as subproject is ${as_subproject}")
-  message(STATUS "ARG0 is ${ARGV0}, ${ARGV1}")
   if(NOT "${ARGV0}" IN_LIST as_subproject)
     message(STATUS "using native find_package for ${ARGV0}: ${ARGV}")
     _find_package(${ARGV})
