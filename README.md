@@ -74,7 +74,7 @@ Let's compare what each workflow buys us
   started for development in every module of this project.
 - If something is changed in e.g. library `D`, then `A` and `MyApp` have to be
   not only relinked but rebuilt. The smaller the individual packages are, the
-  lesser is this a problem.open source
+  lesser is this a problem.
 
 # References
 
