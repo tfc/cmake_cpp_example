@@ -13,4 +13,5 @@ in
     myapp;
   myapp-static = pkgs.pkgsStatic.myapp;
   myapp-win64 = pkgs.pkgsCross.mingwW64.myapp;
+  myapp-aarch64 = pkgs.pkgsCross.aarch64-multiplatform.myapp;
 }
