@@ -12,4 +12,5 @@ in
     libd
     myapp;
   myapp-static = pkgs.pkgsStatic.myapp;
+  myapp-win64 = pkgs.pkgsCross.mingwW64.myapp;
 }
