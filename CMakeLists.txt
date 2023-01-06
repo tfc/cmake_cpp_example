@@ -22,10 +22,10 @@ add_subdirectory(c)
 add_subdirectory(d)
 add_subdirectory(app)
 
-add_custom_target(graphviz ALL
-    COMMAND ${CMAKE_COMMAND} "--graphviz=abc-structure.dot" .
-    COMMAND dot -Tsvg abc-structure.dot -o abc-structure.svg
-    COMMAND dot -Tpdf abc-structure.dot -o abc-structure.pdf
-    COMMAND dot -Tpng abc-structure.dot -o abc-structure.png
-    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-)
+add_custom_target(
+  graphviz ALL
+  COMMAND ${CMAKE_COMMAND} "--graphviz=abc-structure.dot" .
+  COMMAND dot -Tsvg abc-structure.dot -o abc-structure.svg
+  COMMAND dot -Tpdf abc-structure.dot -o abc-structure.pdf
+  COMMAND dot -Tpng abc-structure.dot -o abc-structure.png
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")

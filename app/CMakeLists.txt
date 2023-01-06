@@ -9,8 +9,5 @@ find_package(B REQUIRED)
 find_package(C REQUIRED)
 find_package(D REQUIRED)
 
-target_link_libraries(MyApp
-  A::A
-  B::B
-  )
+target_link_libraries(MyApp A::A B::B)
 install(TARGETS MyApp DESTINATION bin)
