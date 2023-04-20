@@ -1,4 +1,4 @@
-{ stdenv, cmake, libc, libd }:
+{ stdenv, lib, cmake, libc, libd, static ? false }:
 
 stdenv.mkDerivation {
   name = "liba";
@@ -7,4 +7,6 @@ stdenv.mkDerivation {
   propagatedBuildInputs = [ libd ];
   nativeBuildInputs = [ cmake ];
   src = ./.;
+
+  cmakeFlags = lib.optional (!static) "-DBUILD_SHARED_LIBS:BOOL=ON";
 }
