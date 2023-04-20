@@ -1,4 +1,6 @@
-{ stdenv, lib, cmake, static ? false }:
+{ stdenv, lib, cmake
+, static ? stdenv.hostPlatform.isStatic
+}:
 
 stdenv.mkDerivation {
   name = "libb";
