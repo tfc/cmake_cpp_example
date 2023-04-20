@@ -6,7 +6,7 @@ add_executable(MyApp main.cpp)
 
 find_package(A REQUIRED)
 find_package(B REQUIRED)
-find_package(C REQUIRED)
+# transitive public dependency of A
 find_package(D REQUIRED)
 
 target_link_libraries(MyApp A::A B::B)

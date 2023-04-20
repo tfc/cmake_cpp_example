@@ -2,7 +2,9 @@
 
 stdenv.mkDerivation {
   name = "liba";
-  buildInputs = [ libc libd ];
+  buildInputs = [ libc ];
+  # this is a header-only dependency
+  propagatedBuildInputs = [ libd ];
   nativeBuildInputs = [ cmake ];
   src = ./.;
 }

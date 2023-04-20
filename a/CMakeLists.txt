@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.13)
-
 project(A CXX)
 
 add_library(A main.cpp)

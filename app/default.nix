@@ -1,8 +1,8 @@
-{ stdenv, cmake, liba, libb, libc, libd }:
+{ stdenv, cmake, liba, libb }:
 
 stdenv.mkDerivation {
   name = "myapp";
-  buildInputs = [ liba libb libc libd ];
+  buildInputs = [ liba libb ];
   nativeBuildInputs = [ cmake ];
   src = ./.;
 }

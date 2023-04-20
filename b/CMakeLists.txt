@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.13)
+project(B CXX)
+
 add_library(B main.cpp)
 add_library(B::B ALIAS B)
 
