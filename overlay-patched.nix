@@ -2,8 +2,8 @@ final: prev:
 
 let
 
-  patchIt = drv: inStr: outStr: drv.overrideAttrs (_: {
-    patchPhase = ''
+  patchIt = drv: inStr: outStr: drv.overrideAttrs (oldAttrs: {
+    postPatch = oldAttrs.postPatch or "" + ''
       substituteInPlace main.cpp \
         --replace '"${inStr}"' '"${outStr}"'
     '';
